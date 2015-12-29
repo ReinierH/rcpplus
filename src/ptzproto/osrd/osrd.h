@@ -20,13 +20,10 @@
  *  along with rcpplus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PTZ_H_
-#define PTZ_H_
+#ifndef OSRD_H_
+#define OSRD_H_
 
-#include "rcpplus.h"
-
-#define RCP_COMMAND_CONF_RCP_TRANSFER_TRANSPARENT_DATA	0xffdd
-#define RCP_COMMAND_CONF_PTZ_CONTROLLER_AVAILABLE	0x0a51
+#define OSRD_PACKET_SIZE  16
 
 typedef struct {
 	unsigned char tilt_speed:4;
@@ -58,32 +55,34 @@ typedef struct {
 	unsigned char res2:1;
 } Preposition;
 
-int ptz_available(int line);
+typedef int (*Funcptr_t)(unsigned char*, int);
 
-int move_stop(int line, int lease);
+void osrd_init(Funcptr_t sendptr);
 
-int move_right(int line, int lease, int speed);
-int move_left(int line, int lease, int speed);
+int osrd_move_stop(int line, int lease);
 
-int move_up(int line, int lease, int speed);
-int move_down(int line, int lease, int speed);
+int osrd_move_right(int line, int lease, int speed);
+int osrd_move_left(int line, int lease, int speed);
 
-int move_up_right(int line, int lease, int pan_speed, int tilt_speed);
-int move_up_left(int line, int lease, int pan_speed, int tilt_speed);
+int osrd_move_up(int line, int lease, int speed);
+int osrd_move_down(int line, int lease, int speed);
 
-int move_down_right(int line, int lease, int pan_speed, int tilt_speed);
-int move_down_left(int line, int lease, int pan_speed, int tilt_speed);
+int osrd_move_up_right(int line, int lease, int pan_speed, int tilt_speed);
+int osrd_move_up_left(int line, int lease, int pan_speed, int tilt_speed);
 
-int zoom_in(int line, int lease, int speed);
-int zoom_out(int line, int lease, int speed);
+int osrd_move_down_right(int line, int lease, int pan_speed, int tilt_speed);
+int osrd_move_down_left(int line, int lease, int pan_speed, int tilt_speed);
 
-int focus_far(int line, int lease);
-int focus_near(int line, int lease);
+int osrd_zoom_in(int line, int lease, int speed);
+int osrd_zoom_out(int line, int lease, int speed);
 
-int iris_darker(int line, int lease);
-int iris_brighter(int line, int lease);
+int osrd_focus_far(int line, int lease);
+int osrd_focus_near(int line, int lease);
 
-int preposition_set(int line, int lease, unsigned short preposition_number);
-int preposition_shot(int line, int lease, unsigned short preposition_number);
+int osrd_iris_darker(int line, int lease);
+int osrd_iris_brighter(int line, int lease);
 
-#endif /* PTZ_H_ */
+int osrd_preposition_set(int line, int lease, unsigned short preposition_number);
+int osrd_preposition_shot(int line, int lease, unsigned short preposition_number);
+
+#endif /* OSRD_H_ */

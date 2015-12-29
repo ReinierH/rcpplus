@@ -7,6 +7,8 @@ LIBNAME = lib$(NAME)-$(MAJOR).$(MINOR).$(PATCH).a
 export LIBNAME
 export PREFIX
 
+SOURCES = $(wildcard *.c) $(wildcard */*.c)
+
 .PHONY: src example
 
 all: src example
