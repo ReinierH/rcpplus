@@ -14,6 +14,7 @@
 #include "rcpplus.h"
 #include "rcpcommand.h"
 #include "ptz.h"
+#include "osrd.h"
 
 int main(int argc, char* argv[])
 {
@@ -35,6 +36,7 @@ int main(int argc, char* argv[])
 		TL_INFO("ptz is not available for this camera");
 		//return 0;
 	}
+  osrd_init(&ptz_send);
 
 	move_right(0, 10, 5);
 	sleep(1);

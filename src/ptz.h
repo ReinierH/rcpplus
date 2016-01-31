@@ -28,62 +28,6 @@
 #define RCP_COMMAND_CONF_RCP_TRANSFER_TRANSPARENT_DATA	0xffdd
 #define RCP_COMMAND_CONF_PTZ_CONTROLLER_AVAILABLE	0x0a51
 
-typedef struct {
-	unsigned char tilt_speed:4;
-	unsigned char zoom_speed:3;
-	unsigned char db1_res:1;
-
-	unsigned char focus_far:1;
-	unsigned char iris_darker:1;
-	unsigned char iris_brighter:1;
-	unsigned char pan_speed:4;
-	unsigned char db2_res:1;
-
-	unsigned char pan_right:1;
-	unsigned char pan_left:1;
-	unsigned char tilt_down:1;
-	unsigned char tilt_up:1;
-	unsigned char zoom_out:1;
-	unsigned char zoom_in:1;
-	unsigned char focus_near:1;
-	unsigned char db3_res:1;
-} VarSpeedPTZ;
-
-typedef struct {
-	unsigned char function_code:4;
-	unsigned char data_bit_hi:3;
-	unsigned char res1:1;
-
-	unsigned char data_bit_lo:7;
-	unsigned char res2:1;
-} Preposition;
-
-int ptz_available(int line);
-
-int move_stop(int line, int lease);
-
-int move_right(int line, int lease, int speed);
-int move_left(int line, int lease, int speed);
-
-int move_up(int line, int lease, int speed);
-int move_down(int line, int lease, int speed);
-
-int move_up_right(int line, int lease, int pan_speed, int tilt_speed);
-int move_up_left(int line, int lease, int pan_speed, int tilt_speed);
-
-int move_down_right(int line, int lease, int pan_speed, int tilt_speed);
-int move_down_left(int line, int lease, int pan_speed, int tilt_speed);
-
-int zoom_in(int line, int lease, int speed);
-int zoom_out(int line, int lease, int speed);
-
-int focus_far(int line, int lease);
-int focus_near(int line, int lease);
-
-int iris_darker(int line, int lease);
-int iris_brighter(int line, int lease);
-
-int preposition_set(int line, int lease, unsigned short preposition_number);
-int preposition_shot(int line, int lease, unsigned short preposition_number);
+int ptz_send(unsigned char* data, int size);
 
 #endif /* PTZ_H_ */

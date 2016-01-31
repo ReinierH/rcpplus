@@ -13,7 +13,7 @@ all: src example
 
 src:
 	$(MAKE) -C src
-	
+
 example: $(LIBNAME)
 	$(MAKE) -C example
 	
