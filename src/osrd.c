@@ -25,6 +25,7 @@
 #include <arpa/inet.h>
 #include <tlog/tlog.h>
 
+#include "ptz.h"
 #include "osrd.h"
 
 typedef struct {
