@@ -6,9 +6,11 @@
 */
 #include <inttypes.h>
 
+#include "ptz.h"
+#include "pelcod_defs.h"
 #include "pelcod.h"
 
-static Funcptr_t send_data;
+static Funcptr_t send_data = &ptz_send;
 
 unsigned char calc_checksum(unsigned char* data, int size) {
 	short i;
@@ -52,7 +54,7 @@ int pelcod_move_up(unsigned char address, int speed) {
 }
 
 int pelcod_move_down(unsigned char address, int speed) {
-  return pelcod_send(address, PELCOD_STD_UP, (UINT8_MAX / 100) * speed);
+  return pelcod_send(address, PELCOD_STD_DOWN, (UINT8_MAX / 100) * speed);
 }
 
 
