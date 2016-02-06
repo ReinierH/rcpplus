@@ -29,5 +29,6 @@
 #define RCP_COMMAND_CONF_PTZ_CONTROLLER_AVAILABLE	0x0a51
 
 int ptz_send(unsigned char* data, int size);
+int ptz_available(int line);
 
 #endif /* PTZ_H_ */
