@@ -30,7 +30,9 @@
 
 int ptz_send(unsigned char* data, int size) {
 	rcp_packet ptz_req;
-	memset((void*)&ptz_req, 0, sizeof(rcp_packet));
+
+	init_rcp_header(&ptz_req, 0, RCP_COMMAND_CONF_RCP_TRANSFER_TRANSPARENT_DATA, RCP_COMMAND_MODE_WRITE, RCP_DATA_TYPE_P_OCTET);
+	ptz_req.numeric_descriptor = 1;
 
 	// copy payload to rcp packet
 	memcpy((void*)&ptz_req.payload, data, size);
@@ -49,7 +51,7 @@ int ptz_send(unsigned char* data, int size) {
 	return 0;
 
 	error:
-	TL_ERROR("send_osrd()");
+	TL_ERROR("ptz_send()");
 	return -1;
 }
 
