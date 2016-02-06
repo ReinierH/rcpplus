@@ -38,39 +38,39 @@ int main(int argc, char* argv[])
 	}
   osrd_init(&ptz_send);
 
-	move_right(0, 10, 5);
+	osrd_move_right(0, 10, 5);
 	sleep(1);
-	move_left(0, 10, 5);
+	osrd_move_left(0, 10, 5);
 	sleep(1);
-	move_up(0, 10, 5);
+	osrd_move_up(0, 10, 5);
 	sleep(1);
-	move_down(0, 10, 5);
+	osrd_move_down(0, 10, 5);
 	sleep(1);
-	move_up_right(0, 10, 5, 5);
+	osrd_move_up_right(0, 10, 5, 5);
 	sleep(1);
-	move_up_left(0, 10, 5, 5);
+	osrd_move_up_left(0, 10, 5, 5);
 	sleep(1);
-	move_down_right(0, 10, 5, 5);
+	osrd_move_down_right(0, 10, 5, 5);
 	sleep(1);
-	move_down_left(0, 10, 5, 5);
+	osrd_move_down_left(0, 10, 5, 5);
 	sleep(1);
-	move_stop(0, 10);
+	osrd_move_stop(0, 10);
 
-	zoom_in(0, 10, 5);
+	osrd_zoom_in(0, 10, 5);
 	sleep(1);
-	zoom_out(0, 10, 5);
+	osrd_zoom_out(0, 10, 5);
 	sleep(1);
-	move_stop(0, 10);
+	osrd_move_stop(0, 10);
 
-	preposition_set(0, 10, 3);
+	osrd_preposition_set(0, 10, 3);
 	sleep(1);
-	iris_brighter(0, 10);
+	osrd_iris_brighter(0, 10);
 	sleep(1);
-	move_right(0, 10, 5);
+	osrd_move_right(0, 10, 5);
 	sleep(2);
-	move_stop(0, 10);
+	osrd_move_stop(0, 10);
 	sleep(1);
-	preposition_shot(0, 10, 3);
+	osrd_preposition_shot(0, 10, 3);
 	sleep(1);
 
 	stop_event_handler();
