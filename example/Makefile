@@ -1,5 +1,5 @@
 CC = gcc
-SRCS = test_preset.c test_h264_udp.c test_h263_udp.c test_h263_tcp.c test_detect.c test_coder.c test_ptz.c test_transcode.c test_play.c test_record.c test_jpeg.c test_audio.c
+SRCS = test_preset.c test_h264_udp.c test_h263_udp.c test_h263_tcp.c test_detect.c test_coder.c test_osrd_ptz.c test_pelcod_ptz.c test_transcode.c test_play.c test_record.c test_jpeg.c test_audio.c
 OBJS = $(SRCS:.c=.o)
 INCS = -I../src/
 CFLAGS = -g -O0 -std=c99 -Wall -W -Wno-deprecated -Wno-deprecated-declarations
@@ -19,7 +19,7 @@ FFMPEGLIB = \
 		
 FFMPEGINC = -I$(FFMPEG)
 
-all: preset h264_udp h263_udp h263_tcp detect coder ptz transcode play record jpeg audio mpegts test
+all: preset h264_udp h263_udp h263_tcp detect coder osrd_ptz pelcod_ptz transcode play record jpeg audio mpegts test
 
 preset: test_preset.o
 	$(CC) test_preset.o $(LIB) -o preset
@@ -39,8 +39,11 @@ detect: test_detect.o
 coder: test_coder.o
 	$(CC) test_coder.o $(LIB) -o coder
 	
-ptz: test_ptz.o
-	$(CC) test_ptz.o $(LIB) -o ptz
+osrd_ptz: test_osrd_ptz.o
+	$(CC) test_osrd_ptz.o $(LIB) -o osrd_ptz
+
+pelcod_ptz: test_pelcod_ptz.o
+	$(CC) test_pelcod_ptz.o $(LIB) -o pelcod_ptz
 	
 transcode: test_transcode.o
 	$(CC) test_transcode.o $(LIB) $(FFMPEGLIB) -o transcode
@@ -69,4 +72,4 @@ test: test.o
 	$(CC) $(CFLAGS) $(INCS) $(FFMPEGINC) -c $< -o $@ 
 	
 clean:
-	rm -f *.o  h264_udp h263_udp h263_tcp preset detect coder ptz transcode play record jpeg audio mpegts test
+	rm -f *.o  h264_udp h263_udp h263_tcp preset detect coder osrd_ptz pelcod_ptz transcode play record jpeg audio mpegts test
