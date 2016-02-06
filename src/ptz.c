@@ -53,3 +53,19 @@ int ptz_send(unsigned char* data, int size) {
 	return -1;
 }
 
+int ptz_available(int line) {
+	rcp_packet ptz_req;
+
+	init_rcp_header(&ptz_req, 0, RCP_COMMAND_CONF_PTZ_CONTROLLER_AVAILABLE, RCP_COMMAND_MODE_READ, RCP_DATA_TYPE_F_FLAG);
+	ptz_req.numeric_descriptor = line;
+
+	rcp_packet* ptz_resp = rcp_command(&ptz_req);
+	if (ptz_resp == NULL)
+		goto error;
+
+	return ptz_resp->payload[0];
+
+error:
+	TL_ERROR("ptz_available()");
+	return 0;
+}
