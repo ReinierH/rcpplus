@@ -38,35 +38,25 @@ int main(int argc, char* argv[])
 		//return 0;
 	}
 	pelcod_init(&ptz_send);
-	#if 0
-	int i = 0;
-	while(1) {
-		pelcod_goto_preset(0x01, i++);	
-		if(i > 6)
-			i = 0;
 
-		sleep(5);
-	}
-	#else 
-	while(1) {
-		pelcod_move_up(0x01, 0x3f);
-		sleep(1);
-		pelcod_move_stop(0x01);
-		sleep(2);
-		pelcod_move_down(0x01, 0x3f);
-		sleep(1);
-		pelcod_move_stop(0x01);
-		sleep(2);
-		pelcod_move_left(0x01, 0x3f);
-		sleep(1);
-		pelcod_move_stop(0x01);
-		sleep(2);
-		pelcod_move_right(0x01, 0x3f);
-		sleep(1);
-		pelcod_move_stop(0x01);
-		sleep(2);
-	}
-	#endif 
+	pelcod_move_up(0x01, 0x3f);
+	sleep(1);
+	pelcod_move_stop(0x01);
+	sleep(2);
+	pelcod_move_down(0x01, 0x3f);
+	sleep(1);
+	pelcod_move_stop(0x01);
+	sleep(2);
+	pelcod_move_left(0x01, 0x3f);
+	sleep(1);
+	pelcod_move_stop(0x01);
+	sleep(2);
+	pelcod_move_right(0x01, 0x3f);
+	sleep(1);
+	pelcod_move_stop(0x01);
+	sleep(2);
+	pelcod_goto_preset(0x01, 6);
+	sleep(2);
 
 	stop_event_handler();
 
