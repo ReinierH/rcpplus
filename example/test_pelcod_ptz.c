@@ -39,22 +39,31 @@ int main(int argc, char* argv[])
 	}
 	pelcod_init(&ptz_send);
 
+  printf("moving camera up...\n");
 	pelcod_move_up(0x01, 0x3f);
 	sleep(1);
 	pelcod_move_stop(0x01);
 	sleep(2);
+
+  printf("moving camera down...\n");
 	pelcod_move_down(0x01, 0x3f);
 	sleep(1);
 	pelcod_move_stop(0x01);
 	sleep(2);
+
+  printf("moving camera left...\n");
 	pelcod_move_left(0x01, 0x3f);
 	sleep(1);
 	pelcod_move_stop(0x01);
 	sleep(2);
+
+  printf("moving camera right...\n");
 	pelcod_move_right(0x01, 0x3f);
 	sleep(1);
 	pelcod_move_stop(0x01);
 	sleep(2);
+
+  printf("moving camera to preset 6...\n");
 	pelcod_goto_preset(0x01, 6);
 	sleep(2);
 
