@@ -13,7 +13,7 @@
 static Funcptr_t send_data = &ptz_send;
 
 // static
-unsigned char calc_checksum(unsigned char* data, int size) {
+static unsigned char calc_checksum(unsigned char* data, int size) {
 	short i;
 	unsigned int total = 0;
 	for(i = 0; i < size; i++)
@@ -27,8 +27,7 @@ void pelcod_init(Funcptr_t ptr) {
 	send_data = ptr;
 }
 
-// static 
-int pelcod_send(unsigned char address, unsigned short command, unsigned short payload) {
+static int pelcod_send(unsigned char address, unsigned short command, unsigned short payload) {
 	unsigned char buffer[PELCOD_MSG_SIZE];	
 
 	buffer[0] = 0xFF;						// preamble
@@ -50,7 +49,7 @@ int pelcod_move_right(unsigned char address, unsigned short speed) {
 }
 
 int pelcod_move_left(unsigned char address, unsigned short speed) {
-  return pelcod_send(address, PELCOD_STD_LEFT, (speed & 0xFF) << 8);
+  return pelcod_send(address, PELCOD_STD_LEFT, (speed & 0xFF) << 8t );
 }
 
 int pelcod_move_up(unsigned char address, unsigned short speed) {
