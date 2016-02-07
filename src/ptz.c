@@ -28,15 +28,22 @@
 #include "rcpdefs.h"
 #include "rcpcommand.h"
 
+#define PTZ_LEASETIME	2
+
 int ptz_send(unsigned char* data, int size) {
 	rcp_packet ptz_req;
 
 	init_rcp_header(&ptz_req, 0, RCP_COMMAND_CONF_RCP_TRANSFER_TRANSPARENT_DATA, RCP_COMMAND_MODE_WRITE, RCP_DATA_TYPE_P_OCTET);
 	ptz_req.numeric_descriptor = 1;
 
+	ptz_req.payload[0] = 0x00; // options
+	ptz_req.payload[1] = 0x00; // reserved
+	unsigned short tmp = htons(PTZ_LEASETIME);
+	memcpy(ptz_req.payload+2, &tmp, 2);
+
 	// copy payload to rcp packet
-	memcpy((void*)&ptz_req.payload, data, size);
-	ptz_req.payload_length = size;
+	memcpy((void*)&ptz_req.payload+4, data, size);
+	ptz_req.payload_length = size+4;
 
 	rcp_packet* ptz_resp = rcp_command(&ptz_req);
 
