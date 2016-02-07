@@ -49,7 +49,7 @@ int pelcod_move_right(unsigned char address, unsigned short speed) {
 }
 
 int pelcod_move_left(unsigned char address, unsigned short speed) {
-  return pelcod_send(address, PELCOD_STD_LEFT, (speed & 0xFF) << 8t );
+  return pelcod_send(address, PELCOD_STD_LEFT, (speed & 0xFF) << 8);
 }
 
 int pelcod_move_up(unsigned char address, unsigned short speed) {
