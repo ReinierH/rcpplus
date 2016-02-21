@@ -57,11 +57,36 @@ int main(int argc, char* argv[])
 	pelcod_move_stop(0x01);
 	sleep(2);
 
+
   printf("moving camera right...\n");
 	pelcod_move_right(0x01, 0x3f);
 	sleep(1);
 	pelcod_move_stop(0x01);
 	sleep(2);
+
+  printf("moving camera 180 degrees...\n");
+  	pelcod_move_around(0x01);
+	sleep(1);
+	pelcod_move_stop(0x01);
+	sleep(2);
+
+	pelcod_set_zoom_speed(0x01, 3);
+
+  printf("zoom camera near...\n");
+	pelcod_zoom_near(0x01);
+	sleep(1);
+	pelcod_move_stop(0x01);
+	sleep(2);
+
+  printf("zoom camera far...\n");
+	pelcod_zoom_far(0x01);
+	sleep(1);
+	pelcod_move_stop(0x01);
+	sleep(2);
+
+  printf("writing \"hello\" to camera...\n");
+  	pelcod_write_str(0x01, "hello");
+  	sleep(3);
 
   printf("moving camera to preset 6...\n");
 	pelcod_goto_preset(0x01, 6);
