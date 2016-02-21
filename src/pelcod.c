@@ -12,7 +12,6 @@
 
 static Funcptr_t send_data = &ptz_send;
 
-// static
 static unsigned char calc_checksum(unsigned char* data, int size) {
 	short i;
 	unsigned int total = 0;
@@ -60,6 +59,14 @@ int pelcod_move_down(unsigned char address, unsigned short speed) {
   return pelcod_send(address, PELCOD_STD_DOWN, speed);
 }
 
+int pelcod_zoom_far(unsigned char address) {
+	return pelcod_send(address, PELCOD_STD_FOC_FAR, 0x3f);
+}
+
+int pelcod_zoom_near(unsigned char address) {
+	return pelcod_send(address, PELCOD_STD_FOC_NEAR, 0x3f);
+}
+
 int pelcod_move_stop(unsigned char address) {
 	return pelcod_send(address, 0x00, 0x00);
 }
@@ -69,6 +76,28 @@ int pelcod_goto_preset(unsigned char address, unsigned short preset) {
 	return pelcod_send(address, PELCOD_EXT_PRE_TO, preset);
 }
 
+int pelcod_set_zoom_speed(unsigned char address, unsigned short speed) {
+	return pelcod_send(address, PELCOD_EXT_ZOO_SPE_SET, speed);
+}
 
+int pelcod_set_focus_speed(unsigned char address, unsigned short speed) {
+	return pelcod_send(address, PELCOD_EXT_FOC_SPE_SET, speed);
+}
 
+int pelcod_move_around(unsigned char address) {
+	return pelcod_send(address, PELCOD_EXT_FLIP, 21);
+}
+
+int pelcod_write_str(unsigned char address, const unsigned char* str) {
+	int i, res;
+	for(i = 0; i < 28 && str[i] != '\0'; i++) {
+		unsigned short payload = ((i << 8) & 0xFF00) || str[i] & 0xFF;
+		res = pelcod_send(address, PELCOD_EXT_CHAR_WR, payload); 
+
+		if(res <= 0) 
+			return(res);
+	}
+
+	return(res);
+}
 
